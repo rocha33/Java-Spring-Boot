@@ -6,6 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Agenda {
@@ -14,9 +18,14 @@ public class Agenda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	
+	@Min(0)
 	int prioridade;
+	
+	@NotBlank
 	String descricao;
+	
+	@NotNull
+	@Future
 	Date data;
 	
 	public Agenda(int prioridade, String descricao, Date data) {

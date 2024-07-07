@@ -24,7 +24,7 @@ public class AgendaController {
 	private AgendaRepositorio agendaRepositorio;
 	
 	@RequestMapping(method = { RequestMethod.POST, RequestMethod.PUT})
-	public Agenda salvarAgenda(Agenda agenda) {
+	public Agenda salvarAgenda(@Valid Agenda agenda) {
 		return agendaRepositorio.save(agenda);
 	}	
 	
