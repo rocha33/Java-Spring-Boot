@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.agenda.agenda.model.Agenda;
 
-public interface AgendaRepositorio extends CrudRepository<Agenda, Integer> {	
+public interface AgendaRepositorio extends CrudRepository<Agenda, Integer>,  PagingAndSortingRepository<Agenda, Integer> {	
 	
 	
 	public Iterable<Agenda> findByDescricaoContaining(String descricao);
