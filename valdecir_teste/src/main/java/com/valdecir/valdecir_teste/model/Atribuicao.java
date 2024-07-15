@@ -5,9 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Atribuicao {
+public class Atribuicao {	
 	
-	@Id
+	@Id  
     @Column(length = 20, nullable = false)
     private String id;
 
@@ -15,8 +15,8 @@ public class Atribuicao {
     private String nome;
 
     @Column(nullable = false)
-    private Boolean situacao = true;    
-    
+    private Boolean situacao = true;     
+   
 
 	public Atribuicao(String id, String nome, Boolean situacao) {
 		super();

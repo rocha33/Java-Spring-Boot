@@ -57,15 +57,8 @@ public class SituacaoService {
 	public void deletarSituacao(String id) throws Exception {
 
 		try {
-			// Verifica se o registro pode ser excluído
-			if (situacaoRepository.existsById(id)) {
-				// Lógica para verificar integridade referencial
-				// Se referenciado em outros lugares, lançar exceção
-				// Exemplo: se há referências na tabela de outro registro, então:
-				// if (outroRepository.existsBySituacaoId(id)) {
-				// throw new IntegrityViolationException("Registro utilizado em outro
-				// cadastro.");
-				// }
+			
+			if (situacaoRepository.existsById(id)) {				
 
 				situacaoRepository.deleteById(id);
 			} else {
