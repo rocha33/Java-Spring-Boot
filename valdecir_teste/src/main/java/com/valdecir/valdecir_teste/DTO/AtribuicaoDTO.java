@@ -1,17 +1,23 @@
 package com.valdecir.valdecir_teste.DTO;
 
+import com.valdecir.valdecir_teste.model.Cartorio;
+
 public class AtribuicaoDTO {
 
 	private String id;
 	private String nome;
 	private Boolean situacao = true;
 	private String mensagemErro;
+	private int cartorioId;
+	
 
-	public AtribuicaoDTO(String id, String nome, Boolean situacao, String mensagemErro) {
+	
+	public AtribuicaoDTO(String id, String nome, Boolean situacao, int cartorioId, String mensagemErro) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.situacao = situacao;
+		this.cartorioId = cartorioId;
 		this.mensagemErro = mensagemErro;
 	}
 
@@ -50,5 +56,14 @@ public class AtribuicaoDTO {
 	public void setMensagemErro(String mensagemErro) {
 		this.mensagemErro = mensagemErro;
 	}
+	
+	public int getCartorioId() {
+		return cartorioId;
+	}
+
+	public void setCartorioId(int cartorioId) {
+		this.cartorioId = cartorioId;
+	}
+
 
 }

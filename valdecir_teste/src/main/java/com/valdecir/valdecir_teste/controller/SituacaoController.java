@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.valdecir.valdecir_teste.DTO.SituacaoDTO;
 import com.valdecir.valdecir_teste.service.SituacaoService;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
+import com.valdecir.valdecir_teste.util.ShowMensagm;
 
 @RestController
 @RequestMapping("/api/situacoes")
@@ -67,12 +68,16 @@ public class SituacaoController {
 	}
 
 	@DeleteMapping(path = "/{id}")
-	public void deletarSituacao(@PathVariable String id) {
+	public ShowMensagm deletarSituacao(@PathVariable String id) {
+		
+		ShowMensagm mensagem = new ShowMensagm();
 		try {
-			situacaoService.deletarSituacao(id);
+			mensagem.setMensagem(situacaoService.deletarSituacao(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return mensagem;
 	}
 
 }

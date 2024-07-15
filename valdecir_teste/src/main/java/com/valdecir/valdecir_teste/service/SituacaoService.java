@@ -8,10 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.valdecir.valdecir_teste.DTO.SituacaoDTO;
+import com.valdecir.valdecir_teste.convert.CartorioConvert;
 import com.valdecir.valdecir_teste.convert.SituacaoConvert;
+import com.valdecir.valdecir_teste.entity.CartorioRepository;
 import com.valdecir.valdecir_teste.entity.SituacaoRepository;
 import com.valdecir.valdecir_teste.model.Situacao;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
+import com.valdecir.valdecir_teste.util.IntegrityViolationException;
 
 @Service
 public class SituacaoService {
@@ -21,6 +24,9 @@ public class SituacaoService {
 
 	@Autowired
 	private SituacaoConvert situacaoConvert;
+
+	@Autowired
+	private CartorioRepository cartorioRepositorio;
 
 	public Page<SituacaoDTO> obterSituacaoPage(int page, int size) {
 
@@ -54,18 +60,26 @@ public class SituacaoService {
 		return situacaoConvert.toDTO(situacaoSalva);
 	}
 
-	public void deletarSituacao(String id) throws Exception {
+	public String deletarSituacao(String id) throws Exception {
 
 		try {
-			
-			if (situacaoRepository.existsById(id)) {				
+
+			if (situacaoRepository.existsById(id)) {
+
+				// verifica referencia
+				if (cartorioRepositorio.ExisteCartorioSituacao(id)) {
+					return "Registro utilizado em outro cadastro.";
+
+				}
 
 				situacaoRepository.deleteById(id);
+
+				return "deletado com sucesso";
 			} else {
-				throw new Exception("Registro não encontrado.");
+				return "Registro não encontrado.";
 			}
 		} catch (DataIntegrityViolationException e) {
-			throw new Exception("Registro utilizado em outro cadastro.");
+			return "Registro utilizado em outro cadastro.";
 		}
 	}
 

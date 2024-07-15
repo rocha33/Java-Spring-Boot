@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 import com.valdecir.valdecir_teste.DTO.AtribuicaoDTO;
 import com.valdecir.valdecir_teste.convert.AtribuicaoConvert;
 import com.valdecir.valdecir_teste.entity.AtribuicaoRepository;
+import com.valdecir.valdecir_teste.entity.CartorioRepository;
+import com.valdecir.valdecir_teste.entity.SituacaoRepository;
 import com.valdecir.valdecir_teste.model.Atribuicao;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
+import com.valdecir.valdecir_teste.util.ShowMensagm;
+import com.valdecir.valdecir_teste.util.IntegrityViolationException;
 
 import jakarta.validation.Valid;
 
@@ -22,7 +26,13 @@ public class AtribuicaoService {
 
 	@Autowired
 	private AtribuicaoConvert atribuicaoConvert;
-	
+
+	@Autowired
+	private SituacaoRepository situacaoRepository;
+
+	@Autowired
+	private CartorioRepository cartorioRepositorio;
+
 	public Page<AtribuicaoDTO> obterAtribuicaoPage(int page, int size) {
 
 		Pageable pageAble = PageRequest.of(page, size);
@@ -43,8 +53,8 @@ public class AtribuicaoService {
 		return atribuicaoConvert.toDTO(situacaoSalva);
 
 	}
-	
-	public AtribuicaoDTO alterarAtribuicao(@Valid AtribuicaoDTO atribuicaoDto) {		
+
+	public AtribuicaoDTO alterarAtribuicao(@Valid AtribuicaoDTO atribuicaoDto) {
 
 		Atribuicao atribuicao = atribuicaoConvert.toEntity(atribuicaoDto);
 		Atribuicao situacaoSalva = atribuicaoRepository.save(atribuicao);
@@ -57,26 +67,30 @@ public class AtribuicaoService {
 		return atribuicaoRepository.findById(id).map(atribuicaoConvert::toDTO).orElse(null);
 	}
 
-	public void deletarAtribuicao(String id) throws Exception {
+	public ShowMensagm deletarAtribuicao(String id) throws Exception {
 
+		ShowMensagm mensagem = new ShowMensagm();
 		try {
 			// Verifica se o registro pode ser excluído
 			if (atribuicaoRepository.existsById(id)) {
-				// Lógica para verificar integridade referencial
-				// Se referenciado em outros lugares, lançar exceção
-				// Exemplo: se há referências na tabela de outro registro, então:
-				// if (outroRepository.existsBySituacaoId(id)) {
-				// throw new IntegrityViolationException("Registro utilizado em outro
-				// cadastro.");
-				// }
+
+				// verifica referencia
+				if (cartorioRepositorio.ExisteCartorioSituacao(id)) {
+					mensagem.setMensagem("Registro utilizado em cadastro de cartorio.");
+					return mensagem;
+
+				}
 
 				atribuicaoRepository.deleteById(id);
+				mensagem.setMensagem("Excluido com sucesso");
+				
 			} else {
-				throw new Exception("Registro não encontrado.");
+				mensagem.setMensagem("Registro não encontrado.");
 			}
 		} catch (DataIntegrityViolationException e) {
-			throw new Exception("Registro utilizado em outro cadastro.");
+			mensagem.setMensagem("Registro utilizado em outro cadastro.");
 		}
+		return mensagem;
 
 	}
 
