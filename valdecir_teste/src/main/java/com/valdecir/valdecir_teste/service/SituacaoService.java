@@ -68,7 +68,7 @@ public class SituacaoService {
 
 				// verifica referencia
 				if (cartorioRepositorio.ExisteCartorioSituacao(id)) {
-					return "Registro utilizado em outro cadastro.";
+					return "Registro vinculado na tabela cartório. Não pode ser deletado!";
 
 				}
 

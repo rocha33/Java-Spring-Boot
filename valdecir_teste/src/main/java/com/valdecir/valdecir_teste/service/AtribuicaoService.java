@@ -75,8 +75,8 @@ public class AtribuicaoService {
 			if (atribuicaoRepository.existsById(id)) {
 
 				// verifica referencia
-				if (cartorioRepositorio.ExisteCartorioSituacao(id)) {
-					mensagem.setMensagem("Registro utilizado em cadastro de cartorio.");
+				if (cartorioRepositorio.ExisteCartorioAtribuicao(id)) {
+					mensagem.setMensagem("Registro vinculado na tabela cartório. Não pode ser deletado!");			
 					return mensagem;
 
 				}

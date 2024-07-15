@@ -1,6 +1,5 @@
 package com.valdecir.valdecir_teste.DTO;
 
-import com.valdecir.valdecir_teste.model.Cartorio;
 
 public class AtribuicaoDTO {
 
