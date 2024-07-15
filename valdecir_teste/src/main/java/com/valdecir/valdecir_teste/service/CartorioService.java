@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.valdecir.valdecir_teste.DTO.AtribuicaoDTO;
 import com.valdecir.valdecir_teste.DTO.CartorioDTO;
-import com.valdecir.valdecir_teste.convert.AtribuicaoConvert;
 import com.valdecir.valdecir_teste.convert.CartorioConvert;
 import com.valdecir.valdecir_teste.entity.AtribuicaoRepository;
 import com.valdecir.valdecir_teste.entity.CartorioRepository;

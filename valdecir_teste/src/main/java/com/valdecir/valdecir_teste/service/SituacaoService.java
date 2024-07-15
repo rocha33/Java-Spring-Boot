@@ -6,15 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.valdecir.valdecir_teste.DTO.SituacaoDTO;
-import com.valdecir.valdecir_teste.convert.CartorioConvert;
 import com.valdecir.valdecir_teste.convert.SituacaoConvert;
 import com.valdecir.valdecir_teste.entity.CartorioRepository;
 import com.valdecir.valdecir_teste.entity.SituacaoRepository;
 import com.valdecir.valdecir_teste.model.Situacao;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
-import com.valdecir.valdecir_teste.util.IntegrityViolationException;
+
 
 @Service
 public class SituacaoService {

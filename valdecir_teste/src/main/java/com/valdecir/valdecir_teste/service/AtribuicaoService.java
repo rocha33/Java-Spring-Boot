@@ -10,11 +10,9 @@ import com.valdecir.valdecir_teste.DTO.AtribuicaoDTO;
 import com.valdecir.valdecir_teste.convert.AtribuicaoConvert;
 import com.valdecir.valdecir_teste.entity.AtribuicaoRepository;
 import com.valdecir.valdecir_teste.entity.CartorioRepository;
-import com.valdecir.valdecir_teste.entity.SituacaoRepository;
 import com.valdecir.valdecir_teste.model.Atribuicao;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
 import com.valdecir.valdecir_teste.util.ShowMensagm;
-import com.valdecir.valdecir_teste.util.IntegrityViolationException;
 
 import jakarta.validation.Valid;
 
@@ -26,9 +24,6 @@ public class AtribuicaoService {
 
 	@Autowired
 	private AtribuicaoConvert atribuicaoConvert;
-
-	@Autowired
-	private SituacaoRepository situacaoRepository;
 
 	@Autowired
 	private CartorioRepository cartorioRepositorio;
