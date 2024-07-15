@@ -15,6 +15,8 @@ import com.valdecir.valdecir_teste.model.Atribuicao;
 import com.valdecir.valdecir_teste.model.Cartorio;
 import com.valdecir.valdecir_teste.util.DuplicateNameException;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -29,9 +31,7 @@ public class CartorioService {
 	@Autowired
 	private AtribuicaoRepository atribuicaoRepository;
 
-	@Autowired
-	private AtribuicaoConvert atribuicaoConvert;
-
+	@Transactional
 	public CartorioDTO salvarCartorio(CartorioDTO cartorioDTO) {
 
 		if (cartorioRepository.existsById(cartorioDTO.getId())) {
@@ -41,15 +41,16 @@ public class CartorioService {
 		}
 
 		Cartorio cartorio = cartorioConvert.toEntity(cartorioDTO);
-		Cartorio cartorioSalva = cartorioRepository.save(cartorio);	
-		
-	
-		for (Atribuicao atrib : cartorioSalva.getAtribuicoes()) {			
+		Cartorio cartorioSalva = cartorioRepository.save(cartorio);
+
+		for (Atribuicao atrib : cartorioSalva.getAtribuicoes()) {
 			AtribuicaoDTO atribuicaoDTO = new AtribuicaoDTO();
 			atribuicaoDTO.setId(atrib.getId());
 			atribuicaoDTO.setNome(atrib.getNome());
 			atribuicaoDTO.setSituacao(atrib.getSituacao());
-			atribuicaoDTO.setCartorioId(cartorioSalva.getId());			
+			atribuicaoDTO.setCartorioId(cartorioSalva.getId());
+
+			cartorioConvert.toDTO(cartorioSalva);
 
 			Atribuicao atribuicao = cartorioConvert.toEntity(atribuicaoDTO);
 			atribuicaoRepository.save(atribuicao);
@@ -72,8 +73,9 @@ public class CartorioService {
 
 	public Page<CartorioDTO> obterCartorioPage(int page, int size) {
 
-		Pageable pageAble = PageRequest.of(page, size);
-		return cartorioRepository.findAll(pageAble).map(cartorioConvert::toDTO);
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Cartorio> cartorioPage = cartorioRepository.findAllWithAtribuicoes(pageable);
+		return cartorioPage.map(cartorioConvert::toDTO);	
 
 	}
 

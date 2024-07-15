@@ -2,6 +2,7 @@ package com.valdecir.valdecir_teste.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Cartorio {
     private String situacao;
 
     @OneToMany
-    @JoinColumn(name = "cartorio_id")
+   @JoinColumn(name = "cartorio_id")
     private List<Atribuicao> atribuicoes;	
 	
 	public Cartorio(int id, @NotBlank @Size(max = 150) String nome, @Size(max = 250) String observacao,

@@ -3,6 +3,8 @@ package com.valdecir.valdecir_teste.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Atribuicao {	
@@ -15,9 +17,9 @@ public class Atribuicao {
     private String nome;
 
     @Column(nullable = false)
-    private Boolean situacao = true;     
-   
+    private Boolean situacao = true;    
 
+	
 	public Atribuicao(String id, String nome, Boolean situacao) {
 		super();
 		this.id = id;
@@ -52,6 +54,8 @@ public class Atribuicao {
 	public void setSituacao(Boolean situacao) {
 		this.situacao = situacao;
 	} 
+	
+
 
     
 
