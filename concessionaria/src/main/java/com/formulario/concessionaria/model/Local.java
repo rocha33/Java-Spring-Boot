@@ -18,13 +18,13 @@ public class Local {
 	
 	private String descricaoEstacionamento;
     private int facilidadeEstacionamento;
-    private String condicoesExternasPredio;
-    private String condicoesInternasPredio;
-    private String condicoesExternasTerreno;    
+    private int condicoesExternasPredio;
+    private int condicoesInternasPredio;
+    private int condicoesExternasTerreno;    
     
 	
 	public Local(int id, String localNome, String descricaoEstacionamento, int facilidadeEstacionamento,
-			String condicoesExternasPredio, String condicoesInternasPredio, String condicoesExternasTerreno) {
+			int condicoesExternasPredio, int condicoesInternasPredio, int condicoesExternasTerreno) {
 		super();
 		this.id = id;
 		this.localNome = localNome;
@@ -59,22 +59,22 @@ public class Local {
 	public void setFacilidadeEstacionamento(int facilidadeEstacionamento) {
 		this.facilidadeEstacionamento = facilidadeEstacionamento;
 	}
-	public String getCondicoesExternasPredio() {
+	public int getCondicoesExternasPredio() {
 		return condicoesExternasPredio;
 	}
-	public void setCondicoesExternasPredio(String condicoesExternasPredio) {
+	public void setCondicoesExternasPredio(int condicoesExternasPredio) {
 		this.condicoesExternasPredio = condicoesExternasPredio;
 	}
-	public String getCondicoesInternasPredio() {
+	public int getCondicoesInternasPredio() {
 		return condicoesInternasPredio;
 	}
-	public void setCondicoesInternasPredio(String condicoesInternasPredio) {
+	public void setCondicoesInternasPredio(int condicoesInternasPredio) {
 		this.condicoesInternasPredio = condicoesInternasPredio;
 	}
-	public String getCondicoesExternasTerreno() {
+	public int getCondicoesExternasTerreno() {
 		return condicoesExternasTerreno;
 	}
-	public void setCondicoesExternasTerreno(String condicoesExternasTerreno) {
+	public void setCondicoesExternasTerreno(int condicoesExternasTerreno) {
 		this.condicoesExternasTerreno = condicoesExternasTerreno;
 	}
 	
